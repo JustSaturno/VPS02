@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Beatify - Home</title>
+    <link rel="icon" type="image/png" href="../assets/Logo_Icon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <img src="../assets/Logo_purple.png" alt="Logo" onclick="location.href='index.html'">
+
+        <!-- <ul>
+            <li><a href="pages/login.html">Login</a></li>
+            <span>|</span>
+            <li><a href="pages/register.html">Register</a></li>
+        </ul> -->
+    </header>
+
+    <div class="add-music-container hidden">
+        <div class="add-music-inner">
+            <h2>Add Audio - <span style="color: var(--logo-color);">Early Version</span></h2>
+
+            <form onsubmit="addMusic(event)">
+                <input type="text" name="url" id="url-input" placeholder="URL - Not working">
+
+                <div class="buttons">
+                    <button type="reset">Reset</button>
+                    <button type="submit">Add Audio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <div class="middle-container">
+                <div class="left-container">
+                    <div class="sizeable-handle">
+                        <div class="sizeable-handle-inner"></div>
+                    </div>
+                    <div class="selectors-container">
+                        <div class="selectors">
+                            <p><i class="fas fa-home"></i><span>Home</span></p>
+                            <p><i class="fas fa-search"></i><span>Search</span></p>
+                            <p><i class="fas fa-book"></i><span>Library</span></p>
+                            <p id="add-music"><i class="fas fa-plus"></i><span>Add Music</span></p>
+                            <p><i class="fas fa-heart"></i><span>Favorites</span></p>
+                        </div>
+                    </div>
+        
+                    <div class="playlist-container">
+                        <div class="playlist">
+                            <div class="playlist-header">
+                                <h1>Playlists</h1>
+                                <i class="fas fa-plus"></i>
+                            </div>
+        
+                            <div class="playlist-preview">
+                                <img src="../assets/saturn.jpg" alt="Logo">
+                                <div class="playlist-preview-info">
+                                    <p>The Life That I Choose</p>
+                                    <p>122 Songs</p>
+                                </div>
+                            </div>
+                            
+                            <div class="playlist-preview">
+                                <img src="../assets/summer_hits.jpg" alt="Logo">
+                                <div class="playlist-preview-info">
+                                    <p>Summer Hits 2010</p>
+                                    <p>43 Songs</p>
+                                </div>
+                            </div>
+        
+                            <div class="playlist-preview">
+                                <img src="../assets/zzz.jfif" alt="Logo">
+                                <div class="playlist-preview-info">
+                                    <p>A Mimir</p>
+                                    <p>136 Songs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    
+            <div class="main-playlist">
+                <div class="main-playlist-info">
+                    <img src="../assets/liked.png" style="width: 130px; height: 140px; border-radius: 15px;" alt="Image">
+                    <div>
+                        <h1>Favorites</h1>
+                        <p>12 songs</p>
+                    </div>
+                
+                    <!-- <i class="fas fa-ellipsis-v"></i>  Three dots -->
+                </div>
+
+                <div class="main-playlist-songs">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div style="display: flex; align-items: center; gap: 1rem">
+                                        <p>#</p>
+                                        <p>Title</p>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div style="display: flex; align-items: center; gap: 1rem">
+                                        <p><i class="fas fa-clock"></i></p>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="dados"></tbody><!-- songs will be added here -->
+                    </table>
+                </div>
+            </div>
+            
+            <div class="ad-container">
+                <div class="ad">
+                    <img src="../assets/ad_placeholder3.jpg" alt="Logo">
+                </div>
+
+                <div class="ad">
+                    <img src="../assets/ad_placeholder2.png" alt="Logo">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="music-player">
+            <div class="music-info">
+                <img src="../assets/Logo_Icon.png" alt="Logo" id="cover-art">
+                <p id="song-info"><span id="title">Listen Now Only on Beatify</span><span id="artist"><span style="color: var(--logo-color);">Beatify</span></p>
+            </div>
+
+            <div class="controls">
+                <div class="buttons-container">
+
+                    <button id="shuffle">
+                        <i class="fas fa-random"></i>
+                    </button>
+
+                    <button id="prev" onclick="prevSong()">
+                        <i class="fas fa-backward"></i>
+                    </button>
+
+                    <button id="play" onclick="togglePlay(this)">
+                        <i class="fas fa-play"></i>
+                    </button>
+
+                    <button id="next" onclick="nextSong()">
+                        <i class="fas fa-forward"></i>
+                    </button>
+
+                    <button id="repeat" onclick="toggleRepeat(this)">
+                        <i class="fas fa-solid fa-circle-notch"></i>
+                    </button>
+
+                </div>
+
+                <div class="progress">
+                    <p id="progress-time">0:00</p>
+                    <div class="progress-filled">
+                        <div class="progress-filled-inner"></div>
+                        <input type="range" id="duration" min="0" max="100" value="0">
+                    </div>
+                    <p id="duration-time">0:00</p>
+                </div>
+            </div>
+
+            <div class="volume">
+                <i class="fas fa-volume-down"></i>
+                <div class="volume-container">
+                    <div class="volume-range"></div>
+                    <input type="range" id="volume" min="0" max="100" value="50">
+                </div>
+                
+            </div>
+        </div>
+
+        <audio class="music-playing" src="" id="audio"></audio>
+    </main>
+
+    <footer></footer>
+</body>
+
+<script>
+    const dados = document.getElementById('dados');
+
+    const pathlist = [
+        {
+            path: 'tkzY_VwNIek',
+            cover: '../assets/musics/tkzY_VwNIek/tkzY_VwNIek.jpg',
+            title: 'Ocean Man',
+            artist: 'Beatify',
+            duration: '3:20'
+        },
+        {
+            path: 'oXThKMFjZ9I',
+            cover: '../assets/musics/oXThKMFjZ9I/oXThKMFjZ9I.jpg',
+            title: 'Waiting to Die',
+            artist: 'Jake Hill',
+            duration: '3:20'
+        },
+        {
+            path: 'NWnFhu0JbU0',
+            cover: '../assets/musics/NWnFhu0JbU0/NWnFhu0JbU0.jpg',
+            title: "Don't have a clue",
+            artist: 'Unknown',
+            duration: '3:20'
+        }
+    ];
+
+    pathlist.forEach((song, index) => {
+                dados.innerHTML += `
+                <tr class="song" path-data="${song.path}" song-id="${index + 1}">
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 1rem">
+                                <p class="song-id">${index + 1}</p>
+                                <div style="display: flex; align-items: center; gap: 1rem">
+                                    <img src="${song.cover}" style="width: 50px; height: 50px; border: 1px solid white" alt="Logo">
+                                    <div>
+                                        <p class="song-title">${song.title}</p>
+                                        <p class="song-artist" style="color: var(--secondary-text);">${song.artist}</p>
+                                    </div>
+                                </div>        
+                            </div>
+                        </td>
+                        <td class="song-duration">${song.duration}</td>
+                        <td><i class="fas fa-ellipsis-v"></i></td>
+                    </tr>
+                `
+            });
+</script>
+</html>
+
+<!-- <i class="fas fa-fire"></i> -->
+<!-- <i class="fas fa-align-justify"></i> -->
